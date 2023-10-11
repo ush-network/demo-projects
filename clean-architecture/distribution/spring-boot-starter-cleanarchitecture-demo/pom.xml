@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>de.ush-network.demos.cleanarchitecture</groupId>
+        <artifactId>bom</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>de.ush-network.demos.cleanarchitecture.distribution</groupId>
+    <artifactId>spring-boot-starter-cleanarchitecture-demo</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.ush-network.demos.cleanarchitecture</groupId>
+            <artifactId>domain-usecase-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ush-network.demos.cleanarchitecture</groupId>
+            <artifactId>domain-usecase-impl</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ush-network.demos.cleanarchitecture.adapter</groupId>
+            <artifactId>repository-adapter-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>de.ush-network.demos.cleanarchitecture.adapter</groupId>
+            <artifactId>webservice-adapter-rest-provider</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,100 @@
+openapi: 3.0.3
+info:
+  title: CleanArchitecture demo REST API
+  description: |
+    Some description of your `API`. All description fields support
+    the usage of markdown language.
+  version: ${project.version}
+servers:
+  - url: http://localhost:8080/api/v1
+tags:
+  - name: "User"
+    description: User Resource End-Points
+
+paths:
+  /user:
+    post:
+      tags:
+        - "User"
+      summary: Register a new User
+      operationId: create
+      requestBody:
+        required: true
+        description: The create request DTO
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserCreateRequest"
+      responses:
+        201:
+          description: Operation Successful
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+components:
+  schemas:
+    # *******************************************************
+    # * Simple Types
+    # *******************************************************
+    TYPE_DateTime:
+      type: string
+      format: date-time
+      example: "2021-12-08T12:07:12Z"
+      description: IETF RFC3339 / ISO-8601 Compliant DateTime String
+    Firstname:
+      type: string
+      example: Bob
+    Lastname:
+      type: string
+      example: Marley
+    EmailAddress:
+      type: string
+      example: bob.marley@example.org
+
+    # *******************************************************
+    # * Object Types
+    # *******************************************************
+    UserCreateRequest:
+      type: object
+      properties:
+        emailAddress:
+          $ref: "#/components/schemas/EmailAddress"
+        firstname:
+          $ref: "#/components/schemas/Firstname"
+        lastname:
+          $ref: "#/components/schemas/Lastname"
+      required:
+        - emailAddress
+        - firstname
+        - lastname
+    User:
+      type: object
+      properties:
+        uid:
+          type: string
+          format: uuid
+          example: 67935f7e-66c6-4f34-91d5-bef48034825d
+          description: unique surrogate identifier of the user.
+        version:
+          type: integer
+          format: int64
+          example: 0
+        createdDate:
+          $ref: "#/components/schemas/TYPE_DateTime"
+        lastModifiedDate:
+          $ref: "#/components/schemas/TYPE_DateTime"
+        emailAddress:
+          $ref: "#/components/schemas/EmailAddress"
+        firstname:
+          $ref: "#/components/schemas/Firstname"
+        lastname:
+          $ref: "#/components/schemas/Lastname"
+      required:
+        - uid
+        - version
+        - createdDate
+        - emailAddress
+        - firstname
+        - lastname
