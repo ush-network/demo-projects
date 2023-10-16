@@ -1,5 +1,5 @@
 # Clean Architecture Demo Project
-This project is a demonstration of clean architecture described in this article.
+This project is a demonstration of clean architecture described in [this article](https://blog.ush-network.de/software-engineering/deep-dive-into-clean-architecture/).
 
 ### How to compile and run
 
