@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>de.ush-network.demos</groupId>
+  <artifactId>owasp-dependency-scan-with-maven</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <description>OWASP Dependency Scan Demo Project</description>
+
+  <properties>
+    <java.version>20</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <maven.build.timestamp.format>yyyy-MM-dd</maven.build.timestamp.format>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>2.2.224</version>
+    </dependency>
+    <dependency>
+      <groupId>org.yaml</groupId>
+      <artifactId>snakeyaml</artifactId>
+      <version>1.33</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.owasp</groupId>
+        <artifactId>dependency-check-maven</artifactId>
+        <version>8.4.0</version>
+        <configuration>
+          <dataDirectory>${settings.localRepository}/../cvss-db</dataDirectory>
+          <failBuildOnCVSS>9</failBuildOnCVSS>
+          <failOnError>true</failOnError>
+          <formats>HTML,XML,JUNIT,JSON,CSV</formats>
+          <name>${project.name}</name>
+          <prettyPrint>true</prettyPrint>
+          <knownExploitedEnabled>true</knownExploitedEnabled>
+          <suppressionFiles>
+            <suppressionFile>${maven.multiModuleProjectDirectory}/.owasp-dependency-check-suppression.xml</suppressionFile>
+          </suppressionFiles>
+        </configuration>
+        <executions>
+          <execution>
+            <id>OWASP Dependency Check</id>
+            <goals>
+              <goal>aggregate</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>
